@@ -13,12 +13,11 @@ RUN apt update && apt-get install -y software-properties-common && add-apt-repos
 ######install docker ###
 
 RUN curl -sSL https://get.docker.com/ | sh
-#RUN mkdir -p /run/systemd && echo 'docker' > /run/systemd/container
 ###### install jenkins Remoting agent
 RUN curl --create-dirs -sSLo /usr/share/jenkins/slave.jar http://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/$JENKINS_REMOTNG_VERSION/remoting-$JENKINS_REMOTNG_VERSION.jar \
     && chmod 755 /usr/share/jenkins \
     && chmod 644 /usr/share/jenkins/slave.jar
 COPY jenkins-slave /usr/local/bin/jenkins-slave
 #COPY docker /bin/docker
-#ENTRYPOINT ["/bin/sh" "-c" "/usr/local/bin/jenkins-slave"]
+ENTRYPOINT ["/bin/sh" "-c" "/usr/local/bin/jenkins-slave"]
 #RUN curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose &&  chmod +x /usr/local/bin/docker-compose                                                                             
